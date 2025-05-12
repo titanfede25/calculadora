@@ -4,3 +4,4 @@ Restar
 Multiplicar
 Dividir
 Potencia
+raíz
