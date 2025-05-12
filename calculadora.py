@@ -1,35 +1,9 @@
 def main():
+
     print("calculadora")
     print("")
-    print("Opciones de ingreso:")
-    print("")
-    print("Aplicar raíz: 1")
-    print("")
-    print("Ingresar un número: 2")
-    print("")
+    resultado=float(input("Ingrese un número: "))
 
-    selector=int(input("Ingrese: "))
-    while(selector > 2 or selector < 1):
-        selector = int(input("ERROR! Ingrese valores válidos (1-2): "))
-
-    if (selector==1):
-        print("")
-        raiz=float(input("Ingrese raíz: "))
-        while (raiz <= 0):
-            print("")
-            raiz=float(input("ERROR! Ingrese raíz válida: "))
-        print("")
-        num=float(input("Ingrese un número positivo: "))
-        while (num <= 0):
-            print("")
-            num=float(input("ERROR! Ingrese un número positivo: "))
-        resultado = num ** (1/raiz)
-    else: 
-        print("")
-        resultado=float(input("Ingrese un número: "))
-
-    print("")
-    print(resultado)
     print("")
     print("Opciones de operaciones: ")
     print("")
@@ -42,34 +16,51 @@ def main():
     print("Dividir: 4")
     print("")
     print("Potenciar: 5")
-
     print("")
+    print("Aplicar raíz: 6")
+    print("")
+
     selector=int(input("Ingrese: "))
-    while(selector > 5 or selector < 1):
+    while(selector > 6 or selector < 1):
         print("")
-        selector = int(input("ERROR! Ingrese valores válidos (1-5): "))
+        selector = int(input("ERROR! Ingrese un valor válido(1-6): "))
     
     if (selector==1):
         print("")
-        num=float(input("Ingrese un número para sumar al anterior"))
+        num=float(input("Ingrese un número para sumar al anterior: "))
         resultado += num
     if (selector==2):
         print("")
-        num=float(input("Ingrese un número para restar al anterior"))
+        num=float(input("Ingrese un número para restar al anterior: "))
         resultado -= num
     if (selector==3):
         print("")
-        num=float(input("Ingrese un número para multiplicar al anterior"))
+        num=float(input("Ingrese un número para multiplicar al anterior: "))
         resultado *= num
     if (selector==4):
         print("")
-        num=float(input("Ingrese un número para multiplicar al anterior"))
+        num=float(input("Ingrese un número para dividir al anterior: "))
         resultado /= num
-    else:
+    if (selector==5):
         print("")
-        num=float(input("Ingrese un número para potenciar al anterior"))
-        
-
+        num=int(input("Ingrese un número entero para potenciar al anterior: "))
+        resultado2 = resultado
+        for i in range (num-1):
+            resultado2=resultado2*resultado
+        if num<0:
+            resultado2 = 1/resultado2#no funciona
+        resultado=resultado2
+    if(selector==6):
+        print("")
+        raiz=int(input("Ingrese raíz: "))
+        while (raiz <= 0):
+            print("")
+            raiz=int(input("ERROR! Ingrese raíz válida: "))
+        if (raiz%2==0 and resultado<0):
+            print("ERROR! Esta cálculo es inválido matemáticamente")
+        else:
+            resultado = resultado ** (1/raiz)
     print("")
     print(resultado)
+
 main()
