@@ -47,44 +47,51 @@ def raiz(resultado):
 
 def main():
 
-    print("calculadora")
+    print("Calculadora")
     print("")
     resultado=float(input("Ingrese un número: "))
+    continuar=1
 
-    print("")
-    print("Opciones de operaciones: ")
-    print("")
-    print("Suma: 1")
-    print("")
-    print("Resta: 2")
-    print("")
-    print("Multiplicar: 3")
-    print("")
-    print("Dividir: 4")
-    print("")
-    print("Potenciar: 5")
-    print("")
-    print("Aplicar raíz: 6")
-    print("")
-
-    selector=int(input("Ingrese: "))
-    while(selector > 6 or selector < 1):
+    while(continuar==1):
         print("")
-        selector = int(input("ERROR! Ingrese un valor válido(1-6): "))
+        print("Opciones de operaciones: ")
+        print("")
+        print("Suma: 1")
+        print("")
+        print("Resta: 2")
+        print("")
+        print("Multiplicar: 3")
+        print("")
+        print("Dividir: 4")
+        print("")
+        print("Potenciar: 5")
+        print("")
+        print("Aplicar raíz: 6")
+        print("")
+
+        selector=int(input("Ingrese: "))
+        while(selector > 6 or selector < 1):
+            print("")
+            selector = int(input("ERROR! Ingrese un valor válido(1-6): "))
     
-    if (selector==1):
-        resultado=suma(resultado)
-    if (selector==2):
-        resultado=resta(resultado)
-    if (selector==3):
-        resultado=multiplicacion(resultado)
-    if (selector==4):
-        resultado=division(resultado)
-    if (selector==5):
-        resultado=potencia(resultado)
-    if(selector==6):
-        resultado=raiz(resultado)
-    print("")
-    print(resultado)
+        if (selector==1):
+            resultado = suma(resultado)
+        if (selector==2):
+            resultado = resta(resultado)
+        if (selector==3):
+            resultado = multiplicacion(resultado)
+        if (selector==4):
+            resultado = division(resultado)
+        if (selector==5):
+            resultado = potencia(resultado)
+        if(selector==6):
+            resultado = raiz(resultado)
+        print("")
+        print(resultado)
+        print("")
+        continuar = int(input("¿Quieres continuar a partir del resultado obtenido (Si=1, No=0)? "))
+        while(continuar != 1 and continuar != 0):
+            print("")
+            continuar = int(input("ERROR! Ingrese un valor válido (Si=1, No=0): "))
 
 main()
