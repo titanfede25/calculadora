@@ -38,7 +38,7 @@ def division(resultado):
 
 def potencia(resultado):
     print("")
-    num=int(input("Ingrese un número natural para potenciar al anterior: "))
+    num=int(input("Ingrese un número natural para potenciar al anterior: "))#no acepta potencia de numeros negativos
     while (num<1):
         print("")
         num=int(input("ERROR! Ingrese potencia válida: "))
@@ -58,7 +58,7 @@ def raiz(resultado):
     while (raiz <= 0):
         print("")
         raiz=int(input("ERROR! Ingrese raíz válida: "))
-    if (raiz%2==0 and resultado<0):
+    if ((raiz%2==0 and resultado<0) or raiz<1):#no se puede hacer una raiz de numero negativo si es par, ni tampoco tampoco una raiz negativa
         print("ERROR! Esta cálculo es inválido matemáticamente. Retornaremos el número guardado previamente.")
     else:
         string = f"{raiz}√{resultado}  = "
