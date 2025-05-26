@@ -1,36 +1,55 @@
+historial = []
+
+def stringFinal(string, resultado):
+    string += str(resultado)
+    historial.append(string)
+
 def suma(resultado):
     print("")
     num=float(input("Ingrese un número para sumar al anterior: "))
+    string = f"{resultado} + {num} = "
     resultado += num
+    stringFinal(string, resultado)
     return resultado
 
 def resta(resultado):
     print("")
     num=float(input("Ingrese un número para restar al anterior: "))
+    string = f"{resultado} - {num} = "
     resultado -= num
+    stringFinal(string, resultado)
     return resultado
 
 def multiplicacion(resultado):
     print("")
     num=float(input("Ingrese un número para multiplicar al anterior: "))
+    string = f"{resultado} * {num} = "
     resultado *= num
+    stringFinal(string, resultado)
     return resultado
 
 def division(resultado):
     print("")
     num=float(input("Ingrese un número para dividir al anterior: "))
+    string = f"{resultado} / {num} = "
     resultado /= num
+    stringFinal(string, resultado)
     return resultado
 
 def potencia(resultado):
     print("")
     num=int(input("Ingrese un número natural para potenciar al anterior: "))
+    while (num<1):
+        print("")
+        num=int(input("ERROR! Ingrese potencia válida: "))
+    string = f"{resultado}^{num} = "
     resultado2 = resultado
     if num == 0:
         resultado2 = 1
     else:
         for i in range (num-1):
             resultado2=resultado2*resultado
+    stringFinal(string, resultado2)
     return resultado2
 
 def raiz(resultado):
@@ -40,9 +59,11 @@ def raiz(resultado):
         print("")
         raiz=int(input("ERROR! Ingrese raíz válida: "))
     if (raiz%2==0 and resultado<0):
-        print("ERROR! Esta cálculo es inválido matemáticamente")
+        print("ERROR! Esta cálculo es inválido matemáticamente. Retornaremos el número guardado previamente.")
     else:
+        string = f"{raiz}√{resultado}  = "
         resultado = resultado ** (1/raiz)
+        stringFinal(string, resultado)
     return resultado
 
 def main():
@@ -52,6 +73,7 @@ def main():
     reinicio = 1
     while (reinicio==1):
         print("")
+        historial.clear()
         resultado=float(input("Ingrese un número: "))
         continuar=1
 
@@ -104,3 +126,4 @@ def main():
                     reinicio = int(input("ERROR! Ingrese un valor válido (Si=1, No=0): "))
 
 main()
+print(historial)
