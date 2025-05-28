@@ -1,8 +1,9 @@
-historial = []
+historial_orden = []
+historial_resultados = []
 
 def stringFinal(string, resultado):
-    string += str(resultado)
-    historial.append(string)
+    historial_orden.append(string + str(resultado))
+    historial_resultados.append(resultado)
 
 def suma(resultado):
     print("")
@@ -67,19 +68,23 @@ def raiz(resultado):
     return resultado
 
 def main():
-
-    print("Calculadora")
+    print("=======================")
+    print("\nCalculadora Portatil")
+    print("\n=======================")
 
     reinicio = 1
     while (reinicio==1):
         print("")
-        historial.clear()
-        resultado=float(input("Ingrese un número: "))
+        historial_resultados.clear()
+        historial_orden.clear()
+        resultado=float(input("\nIngrese un número para comenzar a calcular!: "))
         continuar=1
 
         while(continuar==1):
-            print("")
-            print("Opciones de operaciones: ")
+            print("=======================")
+            print("\nOpciones de operaciones: ")
+            print("Seleccione una operacion para continuar!")
+            print("\n=======================")
             print("")
             print("Suma: 1")
             print("")
@@ -94,7 +99,7 @@ def main():
             print("Aplicar raíz: 6")
             print("")
 
-            selector=int(input("Ingrese: "))
+            selector=int(input("Ingrese la operacion deseada: "))
             while(selector > 6 or selector < 1):
                 print("")
                 selector = int(input("ERROR! Ingrese un valor válido(1-6): "))
@@ -114,16 +119,53 @@ def main():
             print("")
             print(resultado)
             print("")
-            continuar = int(input("¿Quieres continuar a partir del resultado obtenido (Si=1, No=0)? "))
+            continuar = int(input("¿Quieres continuar a partir del resultado obtenido (0 = No, 1 = Si)? "))
             while(continuar != 1 and continuar != 0):
                 print("")
-                continuar = int(input("ERROR! Ingrese un valor válido (Si=1, No=0): "))
+                continuar = int(input("ERROR! Ingrese un valor válido. ¿Quieres continuar a partir del resultado obtenido? (0 = No, 1 = Si): "))
             if (continuar==0):
                 print("")
-                reinicio = int(input("¿Quieres reiniciar la calculadora (Si=1, No=0)? "))
+                reinicio = int(input("¿Quieres reiniciar la calculadora (0 = No, 1 = Si)? "))
                 while(reinicio != 1 and reinicio != 0):
                     print("")
-                    reinicio = int(input("ERROR! Ingrese un valor válido (Si=1, No=0): "))
+                    reinicio = int(input("ERROR! Ingrese un valor válido. ¿Quieres reiniciar la calculadora? (0 = No, 1 = Si): "))
+
+def mostrar_historial():
+    if not historial_orden and not historial_resultados:
+        print("\nNo hay operaciones en el historial!")
+        return
+    
+    print("\n¿Queres ver el historial de calculos?")
+    opcionVer = int(input("Ingrese su opcion (0 = No, 1 = Si): "))
+    while opcionVer != 0 and opcionVer != 1:
+        opcionVer = int(input("ERROR: Por favor, ingrese un numero valido (0 = No, 1 = Si): "))
+    
+    if opcionVer == 1:
+            print("\n¿De que forma queres ordenar el historial?")
+            print("1. Orden Original")
+            print("2. Ordenado por resultado")
+
+            opcionElegir = int(input("Ingrese su opcion (1-2): "))
+            while opcionElegir != 1 and opcionElegir != 2:
+                opcionElegir = int(input("ERROR: Por favor, ingrese un numero valido. (1-2): "))
+
+            print("\nHistorial de operaciones:")
+
+            if opcionElegir == 1:
+                print("Orden original")
+                for item in historial_orden:
+                    print(item)
+            else:
+                print("De menor a mayor")
+                resultados_ordenados = sorted(historial_resultados)
+                mostrados = []
+
+                for item in resultados_ordenados:
+                    for i in range(len(historial_resultados)):
+                        if historial_resultados[i] == item and i not in mostrados:
+                            print(historial_orden[i])
+                            mostrados.append(i)
+                            break
 
 main()
-print(historial)
+mostrar_historial()
