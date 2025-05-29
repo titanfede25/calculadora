@@ -1,9 +1,51 @@
-historial_orden = []
+historial = []
 historial_resultados = []
 
 def stringFinal(string, resultado):
-    historial_orden.append(string + str(resultado))
+    historial.append(string + str(resultado))
     historial_resultados.append(resultado)
+
+def mostrar_historial():
+    if not historial and not historial_resultados:
+        print("\nNo hay operaciones en el historial!")
+        return
+    
+    print("\n¿Queres ver el historial de calculos?")
+    opcionVer = int(input("Ingrese su opcion (0 = No, 1 = Si): "))
+    while opcionVer != 0 and opcionVer != 1:
+        opcionVer = int(input("ERROR: Por favor, ingrese un numero valido (0 = No, 1 = Si): "))
+    
+    if opcionVer == 1:
+            print("\n¿De que forma queres ordenar el historial?")
+            print("1. Orden Original")
+            print("2. Ordenado por resultado")
+
+            opcionElegir = int(input("Ingrese su opcion (1-2): "))
+            while opcionElegir != 1 and opcionElegir != 2:
+                opcionElegir = int(input("ERROR: Por favor, ingrese un numero valido. (1-2): "))
+
+            print("\nHistorial de operaciones:")
+
+            if opcionElegir == 1:
+                print("Orden original de cálculo:")
+                for item in historial:
+                    print(item)
+            else:
+                print("Ordenado por resultado de menor a mayor:")
+                desordenada = 1
+                while desordenada==1:
+                    desordenada = 0
+                    for i in range (len(historial_resultados)-1):
+                        if historial_resultados[i]>historial_resultados[i+1]:
+                            aux = historial_resultados[i]
+                            aux2 = historial[i]
+                            historial_resultados[i] = historial_resultados[i+1]
+                            historial[i] = historial[i+1]
+                            historial_resultados[i+1] = aux
+                            historial[i+1] = aux2
+                            desordenada = 1
+                for item in historial:
+                    print(item)
 
 def suma(resultado):
     print("")
@@ -76,7 +118,7 @@ def main():
     while (reinicio==1):
         print("")
         historial_resultados.clear()
-        historial_orden.clear()
+        historial.clear()
         resultado=float(input("\nIngrese un número para comenzar a calcular!: "))
         continuar=1
 
@@ -125,64 +167,11 @@ def main():
                 continuar = int(input("ERROR! Ingrese un valor válido. ¿Quieres continuar a partir del resultado obtenido? (0 = No, 1 = Si): "))
             if (continuar==0):
                 print("")
+                mostrar_historial()
+                print("")
                 reinicio = int(input("¿Quieres reiniciar la calculadora (0 = No, 1 = Si)? "))
                 while(reinicio != 1 and reinicio != 0):
                     print("")
                     reinicio = int(input("ERROR! Ingrese un valor válido. ¿Quieres reiniciar la calculadora? (0 = No, 1 = Si): "))
 
-def mostrar_historial():
-    if not historial_orden and not historial_resultados:
-        print("\nNo hay operaciones en el historial!")
-        return
-    
-    print("\n¿Queres ver el historial de calculos?")
-    opcionVer = int(input("Ingrese su opcion (0 = No, 1 = Si): "))
-    while opcionVer != 0 and opcionVer != 1:
-        opcionVer = int(input("ERROR: Por favor, ingrese un numero valido (0 = No, 1 = Si): "))
-    
-    if opcionVer == 1:
-            print("\n¿De que forma queres ordenar el historial?")
-            print("1. Orden Original")
-            print("2. Ordenado por resultado")
-
-            opcionElegir = int(input("Ingrese su opcion (1-2): "))
-            while opcionElegir != 1 and opcionElegir != 2:
-                opcionElegir = int(input("ERROR: Por favor, ingrese un numero valido. (1-2): "))
-
-            print("\nHistorial de operaciones:")
-
-            if opcionElegir == 1:
-                print("Orden original de calculo")
-                for item in historial_orden:
-                    print(item)
-            else:
-                print("Ordenado por resultado de menor a mayor")
-                resultados_ordenados = []
-
-                for r in historial_resultados:
-                    resultados_ordenados.append(r)
-
-                largo = len(resultados_ordenados)
-                for i in range(largo):
-                    for j in range(largo - 1):
-                        if resultados_ordenados[j] > resultados_ordenados[j + 1]:
-                            aux = resultados_ordenados[j]
-                            resultados_ordenados[j] = resultados_ordenados[j + 1]
-                            resultados_ordenados[j + 1] = aux
-
-                mostrados = []
-
-                for i in range(len(resultados_ordenados)):
-                    for j in range(len(historial_resultados)):
-                        bool_mostrados = False
-                        for k in range(len(mostrados)):
-                            if mostrados[k] == j:
-                                bool_mostrados = True
-
-                        if not bool_mostrados and historial_resultados[j] == resultados_ordenados[i]:
-                            print(historial_orden[j])
-                            mostrados.append(j)
-
-
 main()
-mostrar_historial()
