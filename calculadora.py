@@ -152,20 +152,37 @@ def mostrar_historial():
             print("\nHistorial de operaciones:")
 
             if opcionElegir == 1:
-                print("Orden original")
+                print("Orden original de calculo")
                 for item in historial_orden:
                     print(item)
             else:
-                print("De menor a mayor")
-                resultados_ordenados = sorted(historial_resultados)
+                print("Ordenado por resultado de menor a mayor")
+                resultados_ordenados = []
+
+                for r in historial_resultados:
+                    resultados_ordenados.append(r)
+
+                largo = len(resultados_ordenados)
+                for i in range(largo):
+                    for j in range(largo - 1):
+                        if resultados_ordenados[j] > resultados_ordenados[j + 1]:
+                            aux = resultados_ordenados[j]
+                            resultados_ordenados[j] = resultados_ordenados[j + 1]
+                            resultados_ordenados[j + 1] = aux
+
                 mostrados = []
 
-                for item in resultados_ordenados:
-                    for i in range(len(historial_resultados)):
-                        if historial_resultados[i] == item and i not in mostrados:
-                            print(historial_orden[i])
-                            mostrados.append(i)
-                            break
+                for i in range(len(resultados_ordenados)):
+                    for j in range(len(historial_resultados)):
+                        bool_mostrados = False
+                        for k in range(len(mostrados)):
+                            if mostrados[k] == j:
+                                bool_mostrados = True
+
+                        if not bool_mostrados and historial_resultados[j] == resultados_ordenados[i]:
+                            print(historial_orden[j])
+                            mostrados.append(j)
+
 
 main()
 mostrar_historial()
