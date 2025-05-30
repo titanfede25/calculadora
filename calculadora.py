@@ -1,3 +1,4 @@
+import random
 historial = []
 historial_resultados = []
 
@@ -33,7 +34,7 @@ def mostrar_historial():
             else:
                 print("Ordenado por resultado de menor a mayor:")
                 desordenada = 1
-                while desordenada==1:
+                while desordenada==1: #intercmbio
                     desordenada = 0
                     for i in range (len(historial_resultados)-1):
                         if historial_resultados[i]>historial_resultados[i+1]:
@@ -81,19 +82,11 @@ def division(resultado):
 
 def potencia(resultado):
     print("")
-    num=int(input("Ingrese un número natural para potenciar al anterior: "))#no acepta potencia de numeros negativos
-    while (num<1):
-        print("")
-        num=int(input("ERROR! Ingrese potencia válida: "))
+    num=int(input("Ingrese un número entero para potenciar al anterior: "))
     string = f"{resultado}^{num} = "
-    resultado2 = resultado
-    if num == 0:
-        resultado2 = 1
-    else:
-        for i in range (num-1):
-            resultado2=resultado2*resultado
-    stringFinal(string, resultado2)
-    return resultado2
+    resultado = resultado ** num
+    stringFinal(string, resultado)
+    return resultado
 
 def raiz(resultado):
     print("")
@@ -140,9 +133,11 @@ def main():
             print("")
             print("Aplicar raíz: 6")
             print("")
+            print("Operación random: 7")
+            print("")
 
             selector=int(input("Ingrese la operacion deseada: "))
-            while(selector > 6 or selector < 1):
+            while(selector > 7 or selector < 1):
                 print("")
                 selector = int(input("ERROR! Ingrese un valor válido(1-6): "))
     
@@ -158,6 +153,20 @@ def main():
                 resultado = potencia(resultado)
             if(selector==6):
                 resultado = raiz(resultado)
+            if(selector==7):
+                aleatorio = random.randint(1,6)
+                if (aleatorio==1):
+                    resultado = suma(resultado)
+                if (aleatorio==2):
+                    resultado = resta(resultado)
+                if (aleatorio==3):
+                    resultado = multiplicacion(resultado)
+                if (aleatorio==4):
+                    resultado = division(resultado)
+                if (aleatorio==5):
+                    resultado = potencia(resultado)
+                if (aleatorio==6):
+                    resultado = raiz(resultado)
             print("")
             print(resultado)
             print("")
