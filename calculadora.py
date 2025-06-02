@@ -3,7 +3,7 @@ historial = []
 historial_resultados = []
 
 def stringFinal(string, resultado):
-    historial.append(string + str(resultado))
+    historial.append(f"{string} {resultado}")
     historial_resultados.append(resultado)
 
 def mostrar_historial():
